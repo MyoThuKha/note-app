@@ -38,6 +38,7 @@ const DetailPage = ({ route, navigation }) => {
           <TextInput
             multiline
             style={styles.text}
+            placeholder="About"
             value={text}
             onChangeText={(value) => {
               setText(value);

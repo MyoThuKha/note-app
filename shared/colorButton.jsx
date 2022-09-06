@@ -12,7 +12,7 @@ const ColorButton = ({ color, current, key }) => {
     );
   }
   return (
-    <TouchableOpacity onPress={() => handleUpdateColor(color, key)}>
+    <TouchableOpacity onPress={() => {}}>
       <View style={[styles.colorBox, { backgroundColor: color }]}></View>
     </TouchableOpacity>
   );

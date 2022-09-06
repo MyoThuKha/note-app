@@ -55,6 +55,19 @@ const HomePage = ({ navigation }) => {
           />
         </View>
       </View>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("Detail", {
+            title: "New Note",
+            body: "",
+            color: "",
+          });
+        }}
+      >
+        <View style={styles.button}>
+          <Text style={{ color: "white", fontSize: 20 }}>+ Create Note</Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -84,6 +97,14 @@ const styles = StyleSheet.create({
     color: "grey",
     fontSize: 15,
     paddingLeft: 2,
+  },
+  button: {
+    marginHorizontal: 20,
+    marginVertical: 25,
+    paddingVertical: 15,
+    backgroundColor: "orange",
+    borderRadius: 10,
+    alignItems: "center",
   },
 });
 
