@@ -8,9 +8,9 @@ import {
 import Card from "../shared/card";
 
 const dummyData = [
-  { title: "hello", body: "world", color: "pink", key: "1" },
+  { title: "hello", body: "world", color: "#eca7f8", key: "1" },
   { title: "cool", body: "weather", color: "#93bffe", key: "2" },
-  { title: "Tea", body: "free to the world", color: "yellow", key: "3" },
+  { title: "Tea", body: "free to the world", color: "#fcb460", key: "3" },
   { title: "math", body: "2+2=5?", color: "pink", key: "4" },
   { title: "super", body: "man", color: "pink", key: "5" },
   { title: "super", body: "man2", color: "pink", key: "6" },

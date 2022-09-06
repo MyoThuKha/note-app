@@ -4,7 +4,7 @@ import { Feather, Ionicons } from "@expo/vector-icons";
 const DetailPage = ({ route, navigation }) => {
   const { title, body, color } = route.params;
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: color }]}>
       <View style={styles.head}>
         <Ionicons
           name="chevron-back"
@@ -25,7 +25,7 @@ const DetailPage = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#93bffe",
+    // backgroundColor: "#93bffe",
   },
   head: {
     paddingTop: 60,
