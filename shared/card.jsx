@@ -17,10 +17,14 @@ const styles = StyleSheet.create({
   },
   container: {
     padding: 20,
-    marginRight: 20,
+    marginRight: 30,
     borderTopLeftRadius: 9,
     borderBottomLeftRadius: 9,
     backgroundColor: "white",
+    shadowColor: "black",
+    shadowOpacity: 2,
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0,
   },
 });
 

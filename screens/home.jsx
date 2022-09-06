@@ -9,13 +9,13 @@ import Card from "../shared/card";
 
 const dummyData = [
   { title: "hello", body: "world", color: "pink", key: "1" },
-  { title: "cool", body: "weather", color: "blue", key: "2" },
+  { title: "cool", body: "weather", color: "#93bffe", key: "2" },
   { title: "Tea", body: "free to the world", color: "yellow", key: "3" },
   { title: "math", body: "2+2=5?", color: "pink", key: "4" },
   { title: "super", body: "man", color: "pink", key: "5" },
   { title: "super", body: "man2", color: "pink", key: "6" },
 ];
-const HomePage = () => {
+const HomePage = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
@@ -24,7 +24,15 @@ const HomePage = () => {
           <FlatList
             data={dummyData}
             renderItem={({ item }) => (
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("Detail", {
+                    title: item.title,
+                    body: item.body,
+                    color: item.color,
+                  })
+                }
+              >
                 <Card cardColor={item.color}>
                   <View>
                     <Text style={styles.title}>{item.title}</Text>
@@ -43,6 +51,7 @@ const HomePage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#fbfaff",
   },
   content: {
     flex: 1,
