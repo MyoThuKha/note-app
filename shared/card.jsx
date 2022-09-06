@@ -1,17 +1,26 @@
 import { StyleSheet, View } from "react-native";
 
 const Card = (props) => {
-  return <View style={styles.container}>{props.children}</View>;
+  const col = props.cardColor;
+  return (
+    <View style={[styles.card, { backgroundColor: col }]}>
+      <View style={styles.container}>{props.children}</View>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  card: {
     marginHorizontal: 40,
     marginVertical: 20,
-    padding: 10,
-    backgroundColor: "white",
     borderRadius: 9,
-    paddingHorizontal: 20,
+  },
+  container: {
+    padding: 20,
+    marginRight: 20,
+    borderTopLeftRadius: 9,
+    borderBottomLeftRadius: 9,
+    backgroundColor: "white",
   },
 });
 

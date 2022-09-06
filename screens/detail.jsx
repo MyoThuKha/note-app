@@ -2,7 +2,7 @@ import { View } from "react-native";
 
 const DetailPage = () => {
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <Text></Text>
     </View>
   );
