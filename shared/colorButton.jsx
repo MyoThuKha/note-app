@@ -1,6 +1,6 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 
-const ColorButton = ({ color, current }) => {
+const ColorButton = ({ color, current, key }) => {
   if (color == current) {
     return (
       <View
@@ -11,7 +11,11 @@ const ColorButton = ({ color, current }) => {
       ></View>
     );
   }
-  return <View style={[styles.colorBox, { backgroundColor: color }]}></View>;
+  return (
+    <TouchableOpacity onPress={() => handleUpdateColor(color, key)}>
+      <View style={[styles.colorBox, { backgroundColor: color }]}></View>
+    </TouchableOpacity>
+  );
 };
 
 const styles = StyleSheet.create({

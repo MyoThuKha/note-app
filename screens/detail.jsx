@@ -1,34 +1,54 @@
-import { View, Text, Button, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import ColorButton from "../shared/colorButton";
+import { useState } from "react";
 
 const DetailPage = ({ route, navigation }) => {
   const { title, body, color } = route.params;
+  const [text, setText] = useState(body);
   return (
-    <View style={[styles.container, { backgroundColor: color }]}>
-      <View style={styles.head}>
-        <Ionicons
-          name="chevron-back"
-          size={25}
-          color="white"
-          onPress={() => navigation.navigate("Home")}
-        />
-        <Text style={styles.title}>{title}</Text>
-        <Feather name="menu" size={25} color="white" />
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={[styles.container, { backgroundColor: color }]}>
+        <View style={styles.head}>
+          <Ionicons
+            name="chevron-back"
+            size={25}
+            color="white"
+            onPress={() => navigation.navigate("Home")}
+          />
+          <Text style={styles.title}>{title}</Text>
+          <Feather name="menu" size={25} color="white" />
+        </View>
+        <View style={styles.colorBar}>
+          <ColorButton color="white" current={color} />
+          <ColorButton color="#93bffe" current={color} />
+          <ColorButton color="#eca7f8" current={color} />
+          <ColorButton color="#f8a7ae" current={color} />
+          <ColorButton color="#fcb460" current={color} />
+          <ColorButton color="#727272" current={color} />
+        </View>
+        <View style={styles.body}>
+          <TextInput
+            multiline
+            style={styles.text}
+            value={text}
+            onChangeText={(value) => {
+              setText(value);
+            }}
+          />
+        </View>
       </View>
-      <View style={styles.colorBar}>
-        <ColorButton color="#93bffe" current={color} />
-        <ColorButton color="#eca7f8" current={color} />
-        <ColorButton color="#f8a7ae" current={color} />
-        <ColorButton color="#fcb460" current={color} />
-        <ColorButton color="#727272" current={color} />
-      </View>
-      <View style={styles.body}>
-        <Text>{body}</Text>
-      </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -54,6 +74,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     color: "white",
+  },
+  text: {
+    fontSize: 18,
   },
   colorBar: {
     flexDirection: "row",

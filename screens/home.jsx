@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   FlatList,
   Text,
@@ -7,22 +8,32 @@ import {
 } from "react-native";
 import Card from "../shared/card";
 
-const dummyData = [
-  { title: "hello", body: "world", color: "#eca7f8", key: "1" },
-  { title: "cool", body: "weather", color: "#93bffe", key: "2" },
-  { title: "Tea", body: "free to the world", color: "#fcb460", key: "3" },
-  { title: "math", body: "2+2=5?", color: "pink", key: "4" },
-  { title: "super", body: "man", color: "pink", key: "5" },
-  { title: "super", body: "man2", color: "pink", key: "6" },
-];
 const HomePage = ({ navigation }) => {
+  const [data, setData] = useState([
+    { title: "hello", body: "world", color: "#eca7f8", key: "1" },
+    { title: "cool", body: "weather", color: "#93bffe", key: "2" },
+    { title: "Tea", body: "free to the world", color: "#fcb460", key: "3" },
+    { title: "math", body: "2+2=5?", color: "pink", key: "4" },
+    { title: "super", body: "man", color: "pink", key: "5" },
+    { title: "super", body: "man2", color: "pink", key: "6" },
+  ]);
+
+  const handleUpdateColor = (color, key) => {
+    console.log(key);
+    // data.map((item) => {
+    //   if (item.key === key) {
+    //     item.color = color;
+    //   }
+    // });
+    // current.color = color;
+  };
   return (
     <View style={styles.container}>
       <View style={styles.content}>
         <Text style={styles.mainTitle}>My Notes</Text>
         <View style={styles.list}>
           <FlatList
-            data={dummyData}
+            data={data}
             renderItem={({ item }) => (
               <TouchableOpacity
                 onPress={() =>
