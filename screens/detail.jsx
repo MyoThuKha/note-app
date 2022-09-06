@@ -1,5 +1,6 @@
 import { View, Text, Button, StyleSheet } from "react-native";
 import { Feather, Ionicons } from "@expo/vector-icons";
+import ColorButton from "../shared/colorButton";
 
 const DetailPage = ({ route, navigation }) => {
   const { title, body, color } = route.params;
@@ -15,9 +16,15 @@ const DetailPage = ({ route, navigation }) => {
         <Text style={styles.title}>{title}</Text>
         <Feather name="menu" size={25} color="white" />
       </View>
+      <View style={styles.colorBar}>
+        <ColorButton color="#93bffe" current={color} />
+        <ColorButton color="#eca7f8" current={color} />
+        <ColorButton color="#f8a7ae" current={color} />
+        <ColorButton color="#fcb460" current={color} />
+        <ColorButton color="#727272" current={color} />
+      </View>
       <View style={styles.body}>
         <Text>{body}</Text>
-        <Text>{color}</Text>
       </View>
     </View>
   );
@@ -47,6 +54,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     color: "white",
+  },
+  colorBar: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    marginHorizontal: 50,
+    marginBottom: 50,
   },
 });
 
