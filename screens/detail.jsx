@@ -13,8 +13,11 @@ import { useState } from "react";
 import BottomButton from "../shared/button";
 
 const DetailPage = ({ route, navigation }) => {
-  const { title, body, color } = route.params;
+  const { title, body, color, addNote } = route.params;
+
+  const [newTitle, setNewTitle] = useState(title);
   const [text, setText] = useState(body);
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={[styles.container, { backgroundColor: color }]}>
@@ -50,7 +53,12 @@ const DetailPage = ({ route, navigation }) => {
           </View>
           <View style={{ flexDirection: "row" }}>
             <View style={{ width: 100 }}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  addNote({ title: newTitle, body: text, color: "#93bffe" });
+                  navigation.pop();
+                }}
+              >
                 <BottomButton text="+" />
               </TouchableOpacity>
             </View>

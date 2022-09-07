@@ -29,6 +29,14 @@ const HomePage = ({ navigation }) => {
     // });
     // current.color = color;
   };
+  const addNote = (note) => {
+    //this is not the best method for creating id
+    const id = Math.random();
+    note.key = id.toString();
+    setData((data) => {
+      return [note, ...data];
+    });
+  };
   return (
     <View style={styles.container}>
       <View style={styles.content}>
@@ -44,6 +52,7 @@ const HomePage = ({ navigation }) => {
                     title: item.title,
                     body: item.body,
                     color: item.color,
+                    addNote: addNote,
                   })
                 }
               >
@@ -64,6 +73,7 @@ const HomePage = ({ navigation }) => {
             title: "New Note",
             body: "",
             color: "#93bffe",
+            addNote: addNote,
           });
         }}
       >
