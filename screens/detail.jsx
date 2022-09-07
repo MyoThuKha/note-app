@@ -15,7 +15,7 @@ import BottomButton from "../shared/button";
 const DetailPage = ({ route, navigation }) => {
   const { title, body, color, addNote } = route.params;
 
-  const [newTitle, setNewTitle] = useState(title);
+  const [localTitle, setNewTitle] = useState("");
   const [text, setText] = useState(body);
 
   return (
@@ -28,7 +28,16 @@ const DetailPage = ({ route, navigation }) => {
             color="white"
             onPress={() => navigation.navigate("Home")}
           />
-          <Text style={styles.title}>{title}</Text>
+          {/* <Text style={styles.title}>{title}</Text> */}
+          <TextInput
+            style={styles.title}
+            placeholder={title}
+            placeholderTextColor="white"
+            value={localTitle}
+            onChangeText={(value) => {
+              setNewTitle(value);
+            }}
+          />
           <Feather name="menu" size={25} color="white" />
         </View>
         <View style={styles.colorBar}>
@@ -55,7 +64,11 @@ const DetailPage = ({ route, navigation }) => {
             <View style={{ width: 100 }}>
               <TouchableOpacity
                 onPress={() => {
-                  addNote({ title: newTitle, body: text, color: "#93bffe" });
+                  let tempTitle = localTitle;
+                  if (localTitle === "") {
+                    tempTitle = title;
+                  }
+                  addNote({ title: tempTitle, body: text, color: "#93bffe" });
                   navigation.pop();
                 }}
               >
