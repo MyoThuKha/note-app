@@ -13,14 +13,15 @@ import { useState } from "react";
 import BottomButton from "../shared/button";
 
 const DetailPage = ({ route, navigation }) => {
-  const { title, body, color, addNote } = route.params;
+  const { title, body, color, id, addNote, updateNote } = route.params;
 
   const [localTitle, setNewTitle] = useState("");
   const [text, setText] = useState(body);
+  const [currCol, setColor] = useState(color);
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={[styles.container, { backgroundColor: color }]}>
+      <View style={[styles.container, { backgroundColor: currCol }]}>
         <View style={styles.head}>
           <Ionicons
             name="chevron-back"
@@ -41,12 +42,12 @@ const DetailPage = ({ route, navigation }) => {
           <Feather name="menu" size={25} color="white" />
         </View>
         <View style={styles.colorBar}>
-          <ColorButton color="white" current={color} />
-          <ColorButton color="#93bffe" current={color} />
-          <ColorButton color="#eca7f8" current={color} />
-          <ColorButton color="#f8a7ae" current={color} />
-          <ColorButton color="#fcb460" current={color} />
-          <ColorButton color="#727272" current={color} />
+          <ColorButton color="white" current={currCol} setColor={setColor} />
+          <ColorButton color="#93bffe" current={currCol} setColor={setColor} />
+          <ColorButton color="#eca7f8" current={currCol} setColor={setColor} />
+          <ColorButton color="#f8a7ae" current={currCol} setColor={setColor} />
+          <ColorButton color="#fcb460" current={currCol} setColor={setColor} />
+          <ColorButton color="#727272" current={currCol} setColor={setColor} />
         </View>
         <View style={styles.body}>
           <View style={{ flex: 1 }}>
@@ -68,7 +69,7 @@ const DetailPage = ({ route, navigation }) => {
                   if (localTitle === "") {
                     tempTitle = title;
                   }
-                  addNote({ title: tempTitle, body: text, color: "#93bffe" });
+                  addNote({ title: tempTitle, body: text, color: currCol });
                   navigation.pop();
                 }}
               >

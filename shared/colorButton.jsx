@@ -1,6 +1,6 @@
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 
-const ColorButton = ({ color, current, key }) => {
+const ColorButton = ({ color, current, setColor }) => {
   if (color == current) {
     return (
       <View
@@ -12,7 +12,11 @@ const ColorButton = ({ color, current, key }) => {
     );
   }
   return (
-    <TouchableOpacity onPress={() => {}}>
+    <TouchableOpacity
+      onPress={() => {
+        setColor(color);
+      }}
+    >
       <View style={[styles.colorBox, { backgroundColor: color }]}></View>
     </TouchableOpacity>
   );

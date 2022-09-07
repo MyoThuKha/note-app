@@ -20,14 +20,10 @@ const HomePage = ({ navigation }) => {
     { title: "super", body: "man2", color: "pink", key: "6" },
   ]);
 
-  const handleUpdateColor = (color, key) => {
-    console.log(key);
-    // data.map((item) => {
-    //   if (item.key === key) {
-    //     item.color = color;
-    //   }
-    // });
-    // current.color = color;
+  const updateColor = (color, key) => {
+    data.map((item) => {
+      if (item.key === key) item.color = color;
+    });
   };
   const addNote = (note) => {
     //this is not the best method for creating id
@@ -37,6 +33,7 @@ const HomePage = ({ navigation }) => {
       return [note, ...data];
     });
   };
+  const updateNote = (key, note) => {};
   return (
     <View style={styles.container}>
       <View style={styles.content}>
@@ -52,7 +49,9 @@ const HomePage = ({ navigation }) => {
                     title: item.title,
                     body: item.body,
                     color: item.color,
+                    id: item.key,
                     addNote: addNote,
+                    updateNote: updateNote,
                   })
                 }
               >

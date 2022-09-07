@@ -1,9 +1,8 @@
 import { StyleSheet, View } from "react-native";
 
 const Card = (props) => {
-  const col = props.cardColor;
   return (
-    <View style={[styles.card, { backgroundColor: col }]}>
+    <View style={[styles.card, { backgroundColor: props.cardColor }]}>
       <View style={styles.container}>{props.children}</View>
     </View>
   );
