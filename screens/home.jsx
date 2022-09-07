@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import Card from "../shared/card";
 import BottomButton from "../shared/button";
+import { AntDesign } from "@expo/vector-icons";
 
 const HomePage = ({ navigation }) => {
   const [data, setData] = useState([
@@ -20,25 +21,37 @@ const HomePage = ({ navigation }) => {
     { title: "super", body: "man2", color: "pink", key: "6" },
   ]);
 
-  const updateColor = (color, key) => {
-    data.map((item) => {
-      if (item.key === key) item.color = color;
-    });
-  };
   const addNote = (note) => {
-    //this is not the best method for creating id
     const id = Math.random();
     note.key = id.toString();
     setData((data) => {
       return [note, ...data];
     });
   };
-  const updateNote = (key, note) => {};
+
+  const updateNote = (note) => {
+    setData(data.filter((item) => item.key != note.key));
+    setData((data) => {
+      return [note, ...data];
+    });
+  };
+  // const updateNote = (key, note) => {
+  //   data.map((item) => {
+  //     if (item.key === key) {
+  //       item = note;
+  //     }
+  //   });
+  // };
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <Text style={styles.mainTitle}>My Notes</Text>
-        <TextInput placeholder="Search Note" styles={styles.searchbar} />
+        <View style={styles.header}>
+          <Text style={styles.mainTitle}>My Notes</Text>
+          <AntDesign name="filter" size={28} color="black" />
+        </View>
+        <View style={styles.searchbar}>
+          <TextInput placeholder="Search Note" />
+        </View>
         <View style={styles.list}>
           <FlatList
             data={data}
@@ -73,6 +86,7 @@ const HomePage = ({ navigation }) => {
             body: "",
             color: "#93bffe",
             addNote: addNote,
+            updateNote: addNote,
           });
         }}
       >
@@ -93,16 +107,27 @@ const styles = StyleSheet.create({
   list: {
     flex: 1,
   },
-  mainTitle: {
-    paddingTop: 50,
-    marginHorizontal: 20,
+  header: {
+    marginTop: 50,
     marginBottom: 30,
+    marginHorizontal: 25,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  mainTitle: {
+    marginHorizontal: 20,
     fontSize: 28,
   },
   searchbar: {
-    height: 30,
-    margin: 20,
+    // margin: 20,
+    marginHorizontal: 40,
+    marginBottom: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 15,
     backgroundColor: "white",
+
+    borderRadius: 10,
   },
   title: {
     fontSize: 25,

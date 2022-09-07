@@ -79,7 +79,21 @@ const DetailPage = ({ route, navigation }) => {
               </TouchableOpacity>
             </View>
             <View style={{ flex: 1 }}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  let tempTitle = localTitle;
+                  if (localTitle === "") {
+                    tempTitle = title;
+                  }
+                  updateNote({
+                    title: tempTitle,
+                    body: text,
+                    color: curColor,
+                    key: id,
+                  });
+                  navigation.pop();
+                }}
+              >
                 <BottomButton text="save" />
               </TouchableOpacity>
             </View>
