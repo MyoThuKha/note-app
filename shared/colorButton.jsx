@@ -2,11 +2,13 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 
 const ColorButton = ({ color, current, setColor }) => {
   if (color == current) {
+    const borderColor = color === "white" ? "black" : "white";
     return (
+      //current color box
       <View
         style={[
           styles.colorBox,
-          { backgroundColor: color, borderWidth: 1, borderColor: "white" },
+          { backgroundColor: color, borderWidth: 1, borderColor: borderColor },
         ]}
       ></View>
     );

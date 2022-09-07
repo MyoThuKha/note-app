@@ -17,37 +17,39 @@ const DetailPage = ({ route, navigation }) => {
 
   const [localTitle, setNewTitle] = useState("");
   const [text, setText] = useState(body);
-  const [currCol, setColor] = useState(color);
+  const [curColor, setColor] = useState(color);
+
+  const headerColor = curColor === "white" ? "black" : "white";
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={[styles.container, { backgroundColor: currCol }]}>
+      <View style={[styles.container, { backgroundColor: curColor }]}>
         <View style={styles.head}>
           <Ionicons
             name="chevron-back"
             size={25}
-            color="white"
+            color={headerColor}
             onPress={() => navigation.navigate("Home")}
           />
           {/* <Text style={styles.title}>{title}</Text> */}
           <TextInput
             style={styles.title}
             placeholder={title}
-            placeholderTextColor="white"
+            placeholderTextColor={headerColor}
             value={localTitle}
             onChangeText={(value) => {
               setNewTitle(value);
             }}
           />
-          <Feather name="menu" size={25} color="white" />
+          <Feather name="menu" size={25} color={headerColor} />
         </View>
         <View style={styles.colorBar}>
-          <ColorButton color="white" current={currCol} setColor={setColor} />
-          <ColorButton color="#93bffe" current={currCol} setColor={setColor} />
-          <ColorButton color="#eca7f8" current={currCol} setColor={setColor} />
-          <ColorButton color="#f8a7ae" current={currCol} setColor={setColor} />
-          <ColorButton color="#fcb460" current={currCol} setColor={setColor} />
-          <ColorButton color="#727272" current={currCol} setColor={setColor} />
+          <ColorButton color="white" current={curColor} setColor={setColor} />
+          <ColorButton color="#93bffe" current={curColor} setColor={setColor} />
+          <ColorButton color="#eca7f8" current={curColor} setColor={setColor} />
+          <ColorButton color="#f8a7ae" current={curColor} setColor={setColor} />
+          <ColorButton color="#fcb460" current={curColor} setColor={setColor} />
+          <ColorButton color="#727272" current={curColor} setColor={setColor} />
         </View>
         <View style={styles.body}>
           <View style={{ flex: 1 }}>
@@ -69,7 +71,7 @@ const DetailPage = ({ route, navigation }) => {
                   if (localTitle === "") {
                     tempTitle = title;
                   }
-                  addNote({ title: tempTitle, body: text, color: currCol });
+                  addNote({ title: tempTitle, body: text, color: curColor });
                   navigation.pop();
                 }}
               >
