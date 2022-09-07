@@ -5,10 +5,12 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   Keyboard,
+  TouchableOpacity,
 } from "react-native";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import ColorButton from "../shared/colorButton";
 import { useState } from "react";
+import BottomButton from "../shared/button";
 
 const DetailPage = ({ route, navigation }) => {
   const { title, body, color } = route.params;
@@ -35,15 +37,29 @@ const DetailPage = ({ route, navigation }) => {
           <ColorButton color="#727272" current={color} />
         </View>
         <View style={styles.body}>
-          <TextInput
-            multiline
-            style={styles.text}
-            placeholder="About"
-            value={text}
-            onChangeText={(value) => {
-              setText(value);
-            }}
-          />
+          <View style={{ flex: 1 }}>
+            <TextInput
+              multiline
+              style={styles.text}
+              placeholder="About"
+              value={text}
+              onChangeText={(value) => {
+                setText(value);
+              }}
+            />
+          </View>
+          <View style={{ flexDirection: "row" }}>
+            <View style={{ width: 100 }}>
+              <TouchableOpacity>
+                <BottomButton text="+" />
+              </TouchableOpacity>
+            </View>
+            <View style={{ flex: 1 }}>
+              <TouchableOpacity>
+                <BottomButton text="save" />
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
       </View>
     </TouchableWithoutFeedback>

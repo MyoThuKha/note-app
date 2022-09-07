@@ -5,8 +5,10 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
+  TextInput,
 } from "react-native";
 import Card from "../shared/card";
+import BottomButton from "../shared/button";
 
 const HomePage = ({ navigation }) => {
   const [data, setData] = useState([
@@ -31,6 +33,7 @@ const HomePage = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.content}>
         <Text style={styles.mainTitle}>My Notes</Text>
+        <TextInput placeholder="Search Note" styles={styles.searchbar} />
         <View style={styles.list}>
           <FlatList
             data={data}
@@ -60,13 +63,11 @@ const HomePage = ({ navigation }) => {
           navigation.navigate("Detail", {
             title: "New Note",
             body: "",
-            color: "",
+            color: "#93bffe",
           });
         }}
       >
-        <View style={styles.button}>
-          <Text style={{ color: "white", fontSize: 20 }}>+ Create Note</Text>
-        </View>
+        <BottomButton text="+ Create Note" />
       </TouchableOpacity>
     </View>
   );
@@ -89,6 +90,11 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     fontSize: 28,
   },
+  searchbar: {
+    height: 30,
+    margin: 20,
+    backgroundColor: "white",
+  },
   title: {
     fontSize: 25,
     marginBottom: 10,
@@ -97,14 +103,6 @@ const styles = StyleSheet.create({
     color: "grey",
     fontSize: 15,
     paddingLeft: 2,
-  },
-  button: {
-    marginHorizontal: 20,
-    marginVertical: 25,
-    paddingVertical: 15,
-    backgroundColor: "orange",
-    borderRadius: 10,
-    alignItems: "center",
   },
 });
 
