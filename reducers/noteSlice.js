@@ -18,11 +18,15 @@ const noteSlice = createSlice({
       state.data.unshift(action.payload);
     },
     updateNote: (state, action) => {
-      state.data.map((item) => {
-        if (item.key === key) {
-          item = note;
-        }
-      });
+      const data = state.data.filter((item) => item.key != action.payload.key);
+      state.data = data;
+      state.data.unshift(action.payload);
+      // state.data.
+      // state.data.map((item) => {
+      //   if (item.key === action.payload.key) {
+      //     item = action.payload;
+      //   }
+      // });
     },
     deleteNote: (state, action) => {
       console.log(action.payload);

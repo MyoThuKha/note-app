@@ -15,14 +15,6 @@ import { useSelector } from "react-redux";
 const HomePage = ({ navigation }) => {
   const data = useSelector((state) => state.mainData.data);
 
-  // const addNote = (note) => {
-  //   const id = Math.random();
-  //   note.key = id.toString();
-  //   setData((data) => {
-  //     return [note, ...data];
-  //   });
-  // };
-
   // const updateNote = (note) => {
   //   setData(data.filter((item) => item.key != note.key));
   //   setData((data) => {

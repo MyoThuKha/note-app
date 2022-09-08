@@ -11,11 +11,13 @@ import { Feather, Ionicons } from "@expo/vector-icons";
 import ColorButton from "../shared/colorButton";
 import { useState } from "react";
 import BottomButton from "../shared/button";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addNote } from "../reducers/noteSlice";
+import { updateNote } from "../reducers/noteSlice";
 
 const DetailPage = ({ route, navigation }) => {
-  const { title, body, color, id, addNote, updateNote } = route.params;
-
+  const { title, body, color, id } = route.params;
+  const dispatch = useDispatch();
   const [localTitle, setNewTitle] = useState("");
   const [text, setText] = useState(body);
   const [curColor, setColor] = useState(color);
@@ -72,7 +74,15 @@ const DetailPage = ({ route, navigation }) => {
                   if (localTitle === "") {
                     tempTitle = title;
                   }
-                  addNote({ title: tempTitle, body: text, color: curColor });
+                  const generateId = Math.random().toString();
+                  dispatch(
+                    addNote({
+                      title: tempTitle,
+                      body: text,
+                      color: curColor,
+                      key: generateId,
+                    })
+                  );
                   navigation.pop();
                 }}
               >
@@ -86,12 +96,14 @@ const DetailPage = ({ route, navigation }) => {
                   if (localTitle === "") {
                     tempTitle = title;
                   }
-                  updateNote({
-                    title: tempTitle,
-                    body: text,
-                    color: curColor,
-                    key: id,
-                  });
+                  dispatch(
+                    updateNote({
+                      title: tempTitle,
+                      body: text,
+                      color: curColor,
+                      key: id,
+                    })
+                  );
                   navigation.pop();
                 }}
               >
