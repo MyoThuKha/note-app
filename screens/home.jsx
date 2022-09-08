@@ -10,31 +10,25 @@ import {
 import Card from "../shared/card";
 import BottomButton from "../shared/button";
 import { AntDesign } from "@expo/vector-icons";
+import { useSelector } from "react-redux";
 
 const HomePage = ({ navigation }) => {
-  const [data, setData] = useState([
-    { title: "hello", body: "world", color: "#eca7f8", key: "1" },
-    { title: "cool", body: "weather", color: "#93bffe", key: "2" },
-    { title: "Tea", body: "free to the world", color: "#fcb460", key: "3" },
-    { title: "math", body: "2+2=5?", color: "pink", key: "4" },
-    { title: "super", body: "man", color: "pink", key: "5" },
-    { title: "super", body: "man2", color: "pink", key: "6" },
-  ]);
+  const data = useSelector((state) => state.mainData.data);
 
-  const addNote = (note) => {
-    const id = Math.random();
-    note.key = id.toString();
-    setData((data) => {
-      return [note, ...data];
-    });
-  };
+  // const addNote = (note) => {
+  //   const id = Math.random();
+  //   note.key = id.toString();
+  //   setData((data) => {
+  //     return [note, ...data];
+  //   });
+  // };
 
-  const updateNote = (note) => {
-    setData(data.filter((item) => item.key != note.key));
-    setData((data) => {
-      return [note, ...data];
-    });
-  };
+  // const updateNote = (note) => {
+  //   setData(data.filter((item) => item.key != note.key));
+  //   setData((data) => {
+  //     return [note, ...data];
+  //   });
+  // };
   // const updateNote = (key, note) => {
   //   data.map((item) => {
   //     if (item.key === key) {
@@ -63,8 +57,6 @@ const HomePage = ({ navigation }) => {
                     body: item.body,
                     color: item.color,
                     id: item.key,
-                    addNote: addNote,
-                    updateNote: updateNote,
                   })
                 }
               >
@@ -85,8 +77,6 @@ const HomePage = ({ navigation }) => {
             title: "New Note",
             body: "",
             color: "#93bffe",
-            addNote: addNote,
-            updateNote: addNote,
           });
         }}
       >

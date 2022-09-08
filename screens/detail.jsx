@@ -11,6 +11,7 @@ import { Feather, Ionicons } from "@expo/vector-icons";
 import ColorButton from "../shared/colorButton";
 import { useState } from "react";
 import BottomButton from "../shared/button";
+import { useSelector } from "react-redux";
 
 const DetailPage = ({ route, navigation }) => {
   const { title, body, color, id, addNote, updateNote } = route.params;

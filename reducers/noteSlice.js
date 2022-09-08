@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialData = {
+const initialState = {
   data: [
     { title: "hello", body: "world", color: "#eca7f8", key: "1" },
     { title: "cool", body: "weather", color: "#93bffe", key: "2" },
@@ -12,8 +12,23 @@ const initialData = {
 };
 const noteSlice = createSlice({
   name: "note_data",
-  initialData,
-  reducers: {},
+  initialState,
+  reducers: {
+    addNote: (state, action) => {
+      state.data.unshift(action.payload);
+    },
+    updateNote: (state, action) => {
+      state.data.map((item) => {
+        if (item.key === key) {
+          item = note;
+        }
+      });
+    },
+    deleteNote: (state, action) => {
+      console.log(action.payload);
+    },
+  },
 });
 
+export const { addNote, updateNote, deleteNote } = noteSlice.actions;
 export default noteSlice.reducer;
