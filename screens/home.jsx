@@ -10,6 +10,7 @@ import {
 import Card from "../shared/card";
 import BottomButton from "../shared/button";
 import { AntDesign } from "@expo/vector-icons";
+import { useSelector } from "react-redux";
 
 const HomePage = ({ navigation }) => {
   const [data, setData] = useState([
@@ -42,6 +43,9 @@ const HomePage = ({ navigation }) => {
   //     }
   //   });
   // };
+  // const reduxData = useSelector((state) => state.data);
+  const count = useSelector((state) => state);
+  console.log(count);
   return (
     <View style={styles.container}>
       <View style={styles.content}>
