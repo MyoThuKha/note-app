@@ -14,26 +14,54 @@ import Card from "../shared/card";
 import BottomButton from "../shared/button";
 import { AntDesign } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
+import ModalPage from "./modal";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const HomePage = ({ navigation }) => {
   const reduxData = useSelector((state) => state.mainData.data);
   const [data, setData] = useState(reduxData);
   const [showModal, setShowModal] = useState(false);
 
+  const storeData = async (value) => {
+    const stringValue = JSON.stringify(value);
+    try {
+      await AsyncStorage.setItem("@storage_Key", stringValue);
+    } catch (e) {
+      // saving error
+    }
+  };
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("@storage_Key");
+      if (value !== null) {
+        return value;
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const removeData = async () => {
+    try {
+      const value = await AsyncStorage.removeItem("@storage_Key");
+      if (value !== null) {
+        console.log(value);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  storeData({ hello: "world" });
+  console.log(getData());
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
-        <Modal visible={showModal} animationType="slide">
-          <AntDesign
-            name="close"
-            size={28}
-            color="black"
-            onPress={() => {
-              setShowModal(false);
-            }}
-          />
-        </Modal>
-
+        <ModalPage
+          showModal={showModal}
+          setShowModal={setShowModal}
+        ></ModalPage>
         <View style={styles.content}>
           <View style={styles.header}>
             <Text style={styles.mainTitle}>My Notes</Text>

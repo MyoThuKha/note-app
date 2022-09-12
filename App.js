@@ -4,6 +4,7 @@ import MainNavigation from "./routes/stack";
 import { LogBox } from "react-native";
 import { Provider } from "react-redux";
 import store from "./reducers/store";
+import { useEffect } from "react";
 
 LogBox.ignoreLogs([
   "Non-serializable values were found in the navigation state",

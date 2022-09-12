@@ -13,6 +13,7 @@ import BottomButton from "../shared/button";
 import { useDispatch, useSelector } from "react-redux";
 import { addNote } from "../reducers/noteSlice";
 import { updateNote } from "../reducers/noteSlice";
+import moment from "moment/moment";
 
 const DetailPage = ({ route, navigation }) => {
   const { title, body, color, id } = route.params;
@@ -22,6 +23,10 @@ const DetailPage = ({ route, navigation }) => {
   const [curColor, setColor] = useState(color);
 
   const headerColor = curColor === "white" ? "black" : "white";
+
+  const getTime = () => {
+    return moment().format("MM DD YYYY");
+  };
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -80,6 +85,7 @@ const DetailPage = ({ route, navigation }) => {
                       body: text,
                       color: curColor,
                       key: generateId,
+                      date: getTime(),
                     })
                   );
                   navigation.pop();
@@ -101,6 +107,7 @@ const DetailPage = ({ route, navigation }) => {
                       body: text,
                       color: curColor,
                       key: id,
+                      date: getTime(),
                     })
                   );
                   navigation.pop();

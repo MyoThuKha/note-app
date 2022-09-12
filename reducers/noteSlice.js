@@ -29,7 +29,7 @@ const noteSlice = createSlice({
       // });
     },
     deleteNote: (state, action) => {
-      console.log(action.payload);
+      state.filter((item) => item != action.payload);
     },
   },
 });
