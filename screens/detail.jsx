@@ -78,13 +78,11 @@ const DetailPage = ({ route, navigation }) => {
                   if (localTitle === "") {
                     tempTitle = title;
                   }
-                  const generateId = Math.random().toString();
                   dispatch(
                     addNote({
                       title: tempTitle,
                       body: text,
                       color: curColor,
-                      key: generateId,
                       date: getTime(),
                     })
                   );

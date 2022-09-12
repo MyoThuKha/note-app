@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import uuid from "react-native-uuid";
 
 const initialState = {
   data: [
@@ -15,6 +16,8 @@ const noteSlice = createSlice({
   initialState,
   reducers: {
     addNote: (state, action) => {
+      const key = uuid.v4();
+      action.payload.key = key;
       state.data.unshift(action.payload);
     },
     updateNote: (state, action) => {
