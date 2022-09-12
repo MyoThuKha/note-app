@@ -3,8 +3,15 @@ import { AntDesign } from "@expo/vector-icons";
 import { Octicons, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import Card from "../shared/card";
 import BottomButton from "../shared/button";
+import { useSelector } from "react-redux";
+import moment from "moment/moment";
 
-const ModalPage = ({ showModal, setShowModal }) => {
+const ModalPage = ({ showModal, setShowModal, setData }) => {
+  const reduxData = useSelector((state) => state.mainData.data);
+
+  const getTime = () => {
+    return moment().format("MM DD YYYY");
+  };
   return (
     <Modal visible={showModal} animationType="slide" backgroundColor={"black"}>
       <View
@@ -19,8 +26,13 @@ const ModalPage = ({ showModal, setShowModal }) => {
             justifyContent: "center",
           }}
         >
-          <TouchableOpacity onPress={() => {}}>
-            <Card cardColor="white">
+          <TouchableOpacity
+            onPress={() => {
+              setData(reduxData);
+              setShowModal(false);
+            }}
+          >
+            <Card cardColor="#93bffe">
               <View
                 style={{
                   flexDirection: "row",
@@ -33,8 +45,13 @@ const ModalPage = ({ showModal, setShowModal }) => {
               </View>
             </Card>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => {}}>
-            <Card cardColor="white">
+          <TouchableOpacity
+            onPress={() => {
+              setData(reduxData.filter((item) => item.date === getTime()));
+              setShowModal(false);
+            }}
+          >
+            <Card cardColor="orange">
               <View
                 style={{
                   flexDirection: "row",
@@ -42,13 +59,18 @@ const ModalPage = ({ showModal, setShowModal }) => {
                   height: 75,
                 }}
               >
-                <Ionicons name="today" size={30} color="#fcb460" />
+                <Ionicons name="today" size={30} color="orange" />
                 <Text style={{ marginLeft: 30, fontSize: 22 }}>Today</Text>
               </View>
             </Card>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => {}}>
-            <Card cardColor="white">
+          <TouchableOpacity
+            onPress={() => {
+              //Implement here
+              setShowModal(false);
+            }}
+          >
+            <Card cardColor="pink">
               <View
                 style={{
                   flexDirection: "row",
@@ -65,7 +87,7 @@ const ModalPage = ({ showModal, setShowModal }) => {
         <View style={{ alignItems: "flex-end" }}>
           <TouchableOpacity onPress={() => setShowModal(false)}>
             <View style={styles.button}>
-              <Ionicons name="arrow-back" size={24} color="green" />
+              <Ionicons name="arrow-back" size={20} color="green" />
               <Text style={styles.buttonText}>Go back</Text>
             </View>
           </TouchableOpacity>

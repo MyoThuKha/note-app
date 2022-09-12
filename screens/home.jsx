@@ -61,6 +61,7 @@ const HomePage = ({ navigation }) => {
         <ModalPage
           showModal={showModal}
           setShowModal={setShowModal}
+          setData={setData}
         ></ModalPage>
         <View style={styles.content}>
           <View style={styles.header}>
