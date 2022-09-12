@@ -6,6 +6,9 @@ import {
   View,
   StyleSheet,
   TextInput,
+  Modal,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import Card from "../shared/card";
 import BottomButton from "../shared/button";
@@ -13,68 +16,92 @@ import { AntDesign } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 
 const HomePage = ({ navigation }) => {
-  const data = useSelector((state) => state.mainData.data);
+  const reduxData = useSelector((state) => state.mainData.data);
+  const [data, setData] = useState(reduxData);
+  const [showModal, setShowModal] = useState(false);
 
-  // const updateNote = (note) => {
-  //   setData(data.filter((item) => item.key != note.key));
-  //   setData((data) => {
-  //     return [note, ...data];
-  //   });
-  // };
-  // const updateNote = (key, note) => {
-  //   data.map((item) => {
-  //     if (item.key === key) {
-  //       item = note;
-  //     }
-  //   });
-  // };
   return (
-    <View style={styles.container}>
-      <View style={styles.content}>
-        <View style={styles.header}>
-          <Text style={styles.mainTitle}>My Notes</Text>
-          <AntDesign name="filter" size={28} color="black" />
-        </View>
-        <View style={styles.searchbar}>
-          <TextInput placeholder="Search Note" />
-        </View>
-        <View style={styles.list}>
-          <FlatList
-            data={data}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate("Detail", {
-                    title: item.title,
-                    body: item.body,
-                    color: item.color,
-                    id: item.key,
-                  })
-                }
-              >
-                <Card cardColor={item.color}>
-                  <View>
-                    <Text style={styles.title}>{item.title}</Text>
-                    <Text style={styles.body}>{item.body}</Text>
-                  </View>
-                </Card>
-              </TouchableOpacity>
-            )}
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
+        <Modal visible={showModal} animationType="slide">
+          <AntDesign
+            name="close"
+            size={28}
+            color="black"
+            onPress={() => {
+              setShowModal(false);
+            }}
           />
+        </Modal>
+
+        <View style={styles.content}>
+          <View style={styles.header}>
+            <Text style={styles.mainTitle}>My Notes</Text>
+            <AntDesign
+              name="filter"
+              size={28}
+              color="black"
+              onPress={() => {
+                setShowModal(true);
+              }}
+            />
+          </View>
+          <View style={styles.searchbar}>
+            <TextInput
+              placeholder="Search Note"
+              onChangeText={(value) => {
+                const searchValue = value.toLowerCase();
+                if (value === "") {
+                  setData(reduxData);
+                } else {
+                  setData(
+                    reduxData.filter(
+                      (item) =>
+                        item.title.toLowerCase().search(searchValue) != -1
+                    )
+                  );
+                }
+              }}
+            />
+          </View>
+          <View style={styles.list}>
+            <FlatList
+              data={data}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("Detail", {
+                      title: item.title,
+                      body: item.body,
+                      color: item.color,
+                      id: item.key,
+                    })
+                  }
+                >
+                  <Card cardColor={item.color}>
+                    <View>
+                      <Text style={styles.title}>{item.title}</Text>
+                      <Text style={styles.body}>{item.body}</Text>
+                    </View>
+                  </Card>
+                </TouchableOpacity>
+              )}
+            />
+          </View>
         </View>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("Detail", {
+              title: "New Note",
+              body: "",
+              color: "#93bffe",
+            });
+          }}
+        >
+          <BottomButton text="+ Create Note" />
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate("Detail", {
-            title: "New Note",
-            body: "",
-            color: "#93bffe",
-          });
-        }}
-      >
-        <BottomButton text="+ Create Note" />
-      </TouchableOpacity>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
