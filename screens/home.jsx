@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FlatList,
   Text,
@@ -22,38 +22,9 @@ const HomePage = ({ navigation }) => {
   const [data, setData] = useState(reduxData);
   const [showModal, setShowModal] = useState(false);
 
-  const storeData = async (value) => {
-    const stringValue = JSON.stringify(value);
-    try {
-      await AsyncStorage.setItem("@storage_Key", stringValue);
-    } catch (e) {
-      // saving error
-    }
-  };
-
-  const getData = async () => {
-    try {
-      const value = await AsyncStorage.getItem("@storage_Key");
-      if (value !== null) {
-        return value;
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  const removeData = async () => {
-    try {
-      const value = await AsyncStorage.removeItem("@storage_Key");
-      if (value !== null) {
-        console.log(value);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  storeData({ hello: "world" });
-  console.log(getData());
+  useEffect(() => {
+    setData(reduxData);
+  }, [reduxData]);
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
