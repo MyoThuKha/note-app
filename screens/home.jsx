@@ -6,7 +6,6 @@ import {
   View,
   StyleSheet,
   TextInput,
-  Modal,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
@@ -15,7 +14,6 @@ import BottomButton from "../shared/button";
 import { AntDesign } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 import ModalPage from "./modal";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const HomePage = ({ navigation }) => {
   const reduxData = useSelector((state) => state.mainData.data);
