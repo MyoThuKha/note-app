@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "note-app",
+    "name": "Notes",
     "slug": "note-app",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -28,6 +28,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f865728c-3e7d-4893-9a28-a5da0f32d09d"
+      }
     }
   }
 }
