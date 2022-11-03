@@ -21,6 +21,7 @@ const DetailPage = ({ route, navigation }) => {
   const [localTitle, setNewTitle] = useState("");
   const [text, setText] = useState(body);
   const [curColor, setColor] = useState(color);
+  const [menu, showMenu] = useState(false);
 
   const headerColor = curColor === "white" ? "black" : "white";
 
@@ -48,7 +49,12 @@ const DetailPage = ({ route, navigation }) => {
               setNewTitle(value);
             }}
           />
-          <Feather name="menu" size={25} color={headerColor} />
+          <Feather
+            name="menu"
+            size={25}
+            color={headerColor}
+            onPress={() => showMenu(() => !menu)}
+          />
         </View>
         <View style={styles.colorBar}>
           <ColorButton color="white" current={curColor} setColor={setColor} />
