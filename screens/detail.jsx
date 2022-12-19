@@ -5,14 +5,14 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
-import { Feather, Ionicons } from "@expo/vector-icons";
-import ColorButton from "../shared/colorButton";
 import { useState } from "react";
+import { Ionicons } from "@expo/vector-icons";
+import ColorButton from "../shared/colorButton";
 import BottomButton from "../shared/button";
-import { useDispatch, useSelector } from "react-redux";
-import { addNote } from "../reducers/noteSlice";
-import { updateNote } from "../reducers/noteSlice";
+import { useDispatch } from "react-redux";
+import { addNote, updateNote, deleteNote } from "../reducers/noteSlice";
 import moment from "moment/moment";
 
 const DetailPage = ({ route, navigation }) => {
@@ -21,7 +21,6 @@ const DetailPage = ({ route, navigation }) => {
   const [localTitle, setNewTitle] = useState("");
   const [text, setText] = useState(body);
   const [curColor, setColor] = useState(color);
-  const [menu, showMenu] = useState(false);
 
   const headerColor = curColor === "white" ? "black" : "white";
 
@@ -37,7 +36,7 @@ const DetailPage = ({ route, navigation }) => {
             name="chevron-back"
             size={25}
             color={headerColor}
-            onPress={() => navigation.navigate("Home")}
+            onPress={() => navigation.goBack()}
           />
           {/* <Text style={styles.title}>{title}</Text> */}
           <TextInput
@@ -49,11 +48,14 @@ const DetailPage = ({ route, navigation }) => {
               setNewTitle(value);
             }}
           />
-          <Feather
-            name="menu"
+          <Ionicons
+            name="trash-outline"
             size={25}
             color={headerColor}
-            onPress={() => showMenu(() => !menu)}
+            onPress={() => {
+              dispatch(deleteNote(id));
+              navigation.goBack();
+            }}
           />
         </View>
         <View style={styles.colorBar}>
@@ -147,6 +149,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 30,
     paddingVertical: 20,
     paddingHorizontal: 30,
+    justifyContent: "space-between",
   },
 
   title: {

@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import uuid from "react-native-uuid";
 
 const initialState = {
+  // { title,body,color,date,key}
   data: [],
 };
 const noteSlice = createSlice({
@@ -19,7 +20,11 @@ const noteSlice = createSlice({
       state.data.unshift(action.payload);
     },
     deleteNote: (state, action) => {
-      state.filter((item) => item != action.payload);
+      //take id
+      console.log("get", action.payload);
+      console.log("stay", state.data.key);
+      const data = state.data.filter((item) => item.key != action.payload);
+      state.data = data;
     },
   },
 });
